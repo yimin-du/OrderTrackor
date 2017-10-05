@@ -21,7 +21,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">New Order</a></li>
+				<li><a href="neworder">New Order</a></li>
 				<li><a href="#">Other page</a></li>
 				<li><a href="#">Other page</a></li>
 			</ul>

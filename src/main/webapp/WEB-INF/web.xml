@@ -9,7 +9,7 @@
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
-		<servlet-class>com.fdm.orderTrackor.RegisterServlet</servlet-class>
+		<servlet-class>com.fdm.orderTrackorController.RegisterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegisterServlet</servlet-name>
@@ -17,7 +17,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>HomeServlet</servlet-name>
-		<servlet-class>com.fdm.orderTrackor.HomeServlet</servlet-class>
+		<servlet-class>com.fdm.orderTrackorController.HomeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
@@ -25,11 +25,23 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>IndexServlet</servlet-name>
-		<servlet-class>com.fdm.orderTrackor.IndexServlet</servlet-class>
+		<servlet-class>com.fdm.orderTrackorController.IndexServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>IndexServlet</servlet-name>
 		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
-	
+	<servlet>
+		<servlet-name>NewOrderServlet</servlet-name>
+		<servlet-class>com.fdm.orderTrackorController.NewOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewOrderServlet</servlet-name>
+		<url-pattern>/neworder</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>com.fdm.orderTrackorController.ApplicationContextLisetener</listener-class>
+	</listener>
+
+
 </web-app>
