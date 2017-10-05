@@ -20,20 +20,11 @@ public class RegisterServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("register.jsp");
 		dispatcher.forward(req, res);
-		
-		
-
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		CustomerService customerService = PersistUtil.getCustomerService();
-		Customer customer = new Customer();
-		customer.setUsername(req.getParameter("username"));
-		customer.setPassword(req.getParameter("password"));
-		customer.setName(req.getParameter("name"));
-
-		customerService.persistCustomer(customer);
+				
 	}
 
 }

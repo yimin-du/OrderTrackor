@@ -63,8 +63,15 @@ public class CustomerService {
 		TypedQuery<Customer> query =
 				getEntityManager().createQuery("SELECT c from Customer c "
 						+ "WHERE c.username = :username", Customer.class);
+	
 		query.setParameter("username", username);
-		return query.getSingleResult();
+		
+		try{
+			Customer customer = query.getSingleResult();
+			return customer;
+		} catch (Exception e){
+			return null;
+		}
 	}
 	
 	public void addOrder(Customer customer, Order order) {

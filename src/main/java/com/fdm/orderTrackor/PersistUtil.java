@@ -34,5 +34,15 @@ public class PersistUtil {
 	public static EmployeeService getEmployeeService() {
 		return employeeService;
 	}
+
+	public static boolean checkLogin(String username, String password) {
+		Customer retrievedCustomer = customerService.findCustomerByUsername(username);
+		if(retrievedCustomer != null && retrievedCustomer.getPassword().equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 	
 }

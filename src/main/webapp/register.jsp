@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
 <!DOCTYPE html>
 
@@ -15,7 +16,10 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<form action="register" method="POST">
+	<form action="index" method="POST">
+		<c:if test="${userExisted}">
+			<p>The username has been registered. Try another one.</p>
+		</c:if>
 		<div class="form-group">
 			<label for="username" class="col-2 col-form-label">Username</label>
 			<div class="col-6">
