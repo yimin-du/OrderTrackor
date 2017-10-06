@@ -18,6 +18,8 @@ public class HomeServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
+		Customer customer = PersistUtil.getLoginUser();
+		
 		dispatcher.forward(req, res);
 	}
 

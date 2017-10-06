@@ -21,8 +21,7 @@ public class NewOrderServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PersistUtil.newOrder(req);
-		req.setAttribute("orderCreated", true);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("neworder.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
 		dispatcher.forward(req, res);
 			
 	}

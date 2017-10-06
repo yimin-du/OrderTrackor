@@ -86,5 +86,22 @@ public class PersistUtil {
 		return cal.getTime();
 	}
 
+	public static void updateOrder(HttpServletRequest req) {
+		OrderService orderService = getOrderService();
+		Long orderId = Long.parseLong(req.getParameter("orderId"));
+		Order order = orderService.findOrderByID(orderId);
+		Order newOrder = new Order();
+		newOrder.setOrderId(orderId);
+		newOrder.setReceiverName(req.getParameter("receivername"));
+		newOrder.setReceiverAddress(req.getParameter("receiveraddress"));
+//		orderService.persistOrder(order);
+		orderService.updateOrder(newOrder);
+	}
+
+	public static Customer getLoginUser() {
+		
+		return null;
+	}
+
 	
 }

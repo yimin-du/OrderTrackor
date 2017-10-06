@@ -44,6 +44,7 @@ public class OrderServiceTest {
 		order.setSender(sender);
 		order.setReceiverAddress("1 glenelg SA 5010");
 		order.setStatus(OrderStatus.PROCESSING);	
+		orderService.persistOrder(order);
 		
 		order2 = new Order();
 		order2.setSender(sender2);
@@ -78,5 +79,17 @@ public class OrderServiceTest {
 		Assert.assertNull(orderService.findOrderByID(order2.getOrderId()));
 	}
 	
+	
+	@Test 
+	public void test_updateOrder() {
+		Order order3 = new Order();
+		order3.setOrderId(order.getOrderId());
+		order3.setReceiverAddress("new address");
+		orderService.updateOrder(order3);
+		
+		Order retrievedOrder = orderService.findOrderByID(order3.getOrderId());
+		Assert.assertEquals("new address", retrievedOrder.getReceiverAddress());
+		
+	}
 	
 	}

@@ -39,6 +39,16 @@
 		<servlet-name>NewOrderServlet</servlet-name>
 		<url-pattern>/neworder</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>EditOrderServlet</servlet-name>
+		<servlet-class>com.fdm.orderTrackorController.EditOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditOrderServlet</servlet-name>
+		<url-pattern>/editorder</url-pattern>
+	</servlet-mapping>
+	
+	
 	<listener>
 		<listener-class>com.fdm.orderTrackorController.ApplicationContextLisetener</listener-class>
 	</listener>

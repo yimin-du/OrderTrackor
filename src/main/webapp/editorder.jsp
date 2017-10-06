@@ -30,28 +30,26 @@
 	<div class="content">
 		<div class="order-form">
 			<h2>New Order</h2>
-			<form action="neworder" method="POST">
-				<c:if test="${orderCreated}">
-					<p>You just placed an new order.</p>
-				</c:if>
+			<form action="editorder" method="POST">
+				<input type="hidden" name="orderId" value="${order.orderId}" />
 				<div class="form-group">
-					<label for="username" class="col-2 col-form-label">Receiver
+					<label for="receivername" class="col-2 col-form-label">Receiver
 						Name</label>
 					<div class="col-6">
 						<input class="form-control" type="text" placeholder=""
-							name="receivername" id="receivername">
+							name="receivername" id="receivername" value="${order.receiverName}" >
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="text" class="col-2 col-form-label">Receiver
+					<label for="receiverAddress" class="col-2 col-form-label">Receiver
 						Address</label>
 					<div class="col-6">
 						<input class="form-control" type="search" placeholder=""
-							name="receiveraddress" id="address">
+							name="receiveraddress" id="receiverAddress" value="${order.receiverAddress}" >
 					</div>
 				</div>
 
-				<button type="submit" class="btn btn-primary">Create Order</button>
+				<button type="submit" class="btn btn-primary">Update Order</button>
 			</form>
 		</div>
 	</div>

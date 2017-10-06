@@ -85,7 +85,22 @@ public class OrderService {
 	}
 	
 	
+//	public void updateOrder(Order order) {
+//		Query query = getEntityManager().createQuery("UPDATE Order o SET o.receiverAddress=:receiverAddress");
+//		//query.setParameter("receiverName", order.getReceiverName());
+//		query.setParameter("receiverAddress", order.getReceiverAddress());
+//		query.executeUpdate();
+//	}
 	
+	public void updateOrder(Order order) {
+		EntityManager em = getEntityManager();
+		EntityTransaction et = em.getTransaction();	
+		Order retrievedOrder = em.find(Order.class, order.getOrderId());
+		et.begin();
+		retrievedOrder.setReceiverName(order.getReceiverName());
+		retrievedOrder.setReceiverAddress(order.getReceiverAddress());
+		et.commit();
+	}
 	
 
 }
