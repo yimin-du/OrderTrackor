@@ -11,6 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 public class NewOrderServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = -4907484377162501694L;
+	private PersistUtil persistUtil;
+
+	public NewOrderServlet() {
+		persistUtil = new PersistUtil();;
+	}
+
+
+	public NewOrderServlet(PersistUtil persistUtil) {
+		this.persistUtil = persistUtil;
+	}
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -20,7 +31,7 @@ public class NewOrderServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		PersistUtil.newOrder(req);
+		persistUtil.newOrder(req);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
 		dispatcher.forward(req, res);
 			

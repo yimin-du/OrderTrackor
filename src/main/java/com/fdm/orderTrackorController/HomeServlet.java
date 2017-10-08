@@ -12,14 +12,25 @@ import javax.servlet.http.HttpSession;
 import com.fdm.orderTrackor.Customer;
 
 public class HomeServlet extends HttpServlet{
-	
+
 	private static final long serialVersionUID = 353156617168003618L;
+
+	private PersistUtil persistUtil;
+
+	public HomeServlet() {
+		persistUtil = new PersistUtil();;
+	}
+
+
+	public HomeServlet(PersistUtil persistUtil) {
+		this.persistUtil = persistUtil;
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
-		Customer customer = PersistUtil.getLoginUser();
-		
+		Customer customer = persistUtil.getLoginUser();
+
 		dispatcher.forward(req, res);
 	}
 
@@ -29,9 +40,9 @@ public class HomeServlet extends HttpServlet{
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
 
-		if(PersistUtil.checkLogin(username, password)) {
+		if(persistUtil.checkLogin(username, password)) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
-			Customer customer = PersistUtil.getCustomerService().findCustomerByUsername(username);
+			Customer customer = persistUtil.getCustomerService().findCustomerByUsername(username);
 			session.setAttribute("loginUser", customer );
 			dispatcher.forward(req, res);
 		} else {
@@ -41,7 +52,7 @@ public class HomeServlet extends HttpServlet{
 			dispatcher.forward(req, res);
 		}
 
-		
+
 	}
 
 }

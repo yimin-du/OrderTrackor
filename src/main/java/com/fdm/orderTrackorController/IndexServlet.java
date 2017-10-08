@@ -15,7 +15,19 @@ import com.fdm.orderTrackor.CustomerService;
 public class IndexServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -7566667038476922939L;
-	
+	private PersistUtil persistUtil;
+
+	public IndexServlet() {
+		persistUtil = new PersistUtil();;
+	}
+
+
+	public IndexServlet(PersistUtil persistUtil) {
+		this.persistUtil = persistUtil;
+	}
+
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
@@ -26,7 +38,7 @@ public class IndexServlet extends HttpServlet{
 	// Validate registration data
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String username = req.getParameter("username");
-		CustomerService customerService = PersistUtil.getCustomerService();
+		CustomerService customerService = persistUtil.getCustomerService();
 		Customer customer = customerService.findCustomerByUsername(username);
 		if(customer == null) {
 			customer = new Customer();

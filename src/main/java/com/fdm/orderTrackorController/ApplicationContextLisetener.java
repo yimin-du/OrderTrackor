@@ -22,7 +22,7 @@ public class ApplicationContextLisetener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		// init couriers
-		CourierService courierService = PersistUtil.getCourierService();
+		CourierService courierService = new PersistUtil().getCourierService();
 		Courier courier1 = new Courier();
 		courier1.setStatus(CourierStatus.WAITING);
 		Courier courier2 = new Courier();

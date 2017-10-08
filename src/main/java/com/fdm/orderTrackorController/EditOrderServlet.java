@@ -15,11 +15,21 @@ import com.fdm.orderTrackor.Order;
 public class EditOrderServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -2626772973296961317L;
+	private PersistUtil persistUtil;
+	
+	public EditOrderServlet() {
+		persistUtil = new PersistUtil();;
+	}
+	
+	
+	public EditOrderServlet(PersistUtil persistUtil) {
+		this.persistUtil = persistUtil;
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Long orderId = Long.parseLong(req.getParameter("orderId"));
-		Order order = PersistUtil.getOrderService().findOrderByID(orderId);
+		Order order = persistUtil.getOrderService().findOrderByID(orderId);
 
 		req.setAttribute("order", order);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("editorder.jsp");
@@ -28,9 +38,9 @@ public class EditOrderServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		PersistUtil.updateOrder(req);
+		persistUtil.updateOrder(req);
 		Long orderId = Long.parseLong(req.getParameter("orderId"));
-		Order order = PersistUtil.getOrderService().findOrderByID(orderId);
+		Order order = persistUtil.getOrderService().findOrderByID(orderId);
 		Customer customer = order.getSender();
 		HttpSession session = req.getSession();
 		session.setAttribute("loginUser", customer);

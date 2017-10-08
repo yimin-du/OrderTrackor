@@ -19,13 +19,13 @@ import com.fdm.orderTrackor.OrderStatus;
 
 public class PersistUtil {
 	
-	private static CustomerService customerService;
-	private static OrderService orderService;
-	private static EntityManagerFactory emf;
-	private static CourierService courierService;
-	private static EmployeeService employeeService;
+	private CustomerService customerService;
+	private OrderService orderService;
+	private EntityManagerFactory emf;
+	private CourierService courierService;
+	private EmployeeService employeeService;
 	
-	static {
+	public PersistUtil() {
 		emf = Persistence.createEntityManagerFactory("order");
 		customerService = new CustomerService(emf);
 		orderService = new OrderService(emf);
@@ -33,23 +33,23 @@ public class PersistUtil {
 		employeeService = new EmployeeService(emf);
 	}
 
-	public static CustomerService getCustomerService() {
+	public CustomerService getCustomerService() {
 		return customerService;
 	}
 
-	public static OrderService getOrderService() {
+	public OrderService getOrderService() {
 		return orderService;
 	}
 
-	public static CourierService getCourierService() {
+	public CourierService getCourierService() {
 		return courierService;
 	}
 
-	public static EmployeeService getEmployeeService() {
+	public EmployeeService getEmployeeService() {
 		return employeeService;
 	}
 
-	public static boolean checkLogin(String username, String password) {
+	public boolean checkLogin(String username, String password) {
 		Customer retrievedCustomer = customerService.findCustomerByUsername(username);
 		if(retrievedCustomer != null && retrievedCustomer.getPassword().equals(password)) {
 			return true;
@@ -59,12 +59,12 @@ public class PersistUtil {
 		
 	}
 
-	public static void newOrder(HttpServletRequest req) {
+	public void newOrder(HttpServletRequest req) {
 		String receiverName = req.getParameter("receivername");
 		String receiverAddress = req.getParameter("receiveraddress");
 		Order order = new Order();
 		Customer customer = (Customer) req.getSession().getAttribute("loginUser");
-		Courier courier = PersistUtil.getCourierService().findAvailableCourier();
+		Courier courier = this.getCourierService().findAvailableCourier();
 		order.setSender(customer);
 		order.setCost(10);
 		order.setCourier(courier);
@@ -74,11 +74,11 @@ public class PersistUtil {
 		order.setReceiverAddress(receiverAddress);
 		order.setReceiverName(receiverName);
 		order.setStatus(OrderStatus.DISPATCHED);
-		PersistUtil.getOrderService().persistOrder(order);
-		PersistUtil.getCustomerService().addOrder(customer, order);
+		this.getOrderService().persistOrder(order);
+		this.getCustomerService().addOrder(customer, order);
 	}
 	
-	public static Date addDays(Date date, int days) {
+	public Date addDays(Date date, int days) {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(date);
 		cal.add(Calendar.DATE, days);
@@ -86,7 +86,7 @@ public class PersistUtil {
 		return cal.getTime();
 	}
 
-	public static void updateOrder(HttpServletRequest req) {
+	public void updateOrder(HttpServletRequest req) {
 		OrderService orderService = getOrderService();
 		Long orderId = Long.parseLong(req.getParameter("orderId"));
 		Order order = orderService.findOrderByID(orderId);
@@ -94,11 +94,10 @@ public class PersistUtil {
 		newOrder.setOrderId(orderId);
 		newOrder.setReceiverName(req.getParameter("receivername"));
 		newOrder.setReceiverAddress(req.getParameter("receiveraddress"));
-//		orderService.persistOrder(order);
 		orderService.updateOrder(newOrder);
 	}
 
-	public static Customer getLoginUser() {
+	public Customer getLoginUser() {
 		
 		return null;
 	}
